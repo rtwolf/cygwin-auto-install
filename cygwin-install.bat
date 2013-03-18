@@ -1,5 +1,7 @@
-  @ECHO OFF
+@ECHO OFF
 REM -- Automates cygwin installation
+REM -- Source: https://github.com/rtwolf/auto-cygwin-install
+REM -- Based on: https://gist.github.com/wjrogers/1016065
  
 SETLOCAL
  
@@ -13,12 +15,12 @@ SET ROOTDIR=C:/cygwin
  
 REM -- These are the packages we will install (in addition to the default packages)
 SET PACKAGES=mintty,wget,ctags,diffutils,git,git-completion,git-svn,stgit,mercurial
-SET PACKAGES=%PACKAGES%,gcc4,make,automake,autoconf,readline,libncursesw-devel,libiconv
-SET PACKAGES=%PACKAGES%,lua,python,ruby
+REM -- These are necessary for apt-cyg install, do not change. Any duplicates will be ignored.
+SET PACKAGES=%PACKAGES%,wget,tar,gawk,bzip2,subversion
  
 REM -- Do it!
 ECHO *** INSTALLING DEFAULT PACKAGES
-setup -q -d -D -L -X -s %SITE% -l "%LOCALDIR%" -R "%ROOTDIR%"
+setup --quiet-mode --no-desktop --download --local-install --no-verify -s %SITE% -l "%LOCALDIR%" -R "%ROOTDIR%"
 ECHO.
 ECHO.
 ECHO *** INSTALLING CUSTOM PACKAGES
@@ -30,7 +32,15 @@ ECHO.
 ECHO cygwin installation updated
 ECHO  - %PACKAGES%
 ECHO.
- 
+
+ECHO apt-cyg installing.
+@ECHO ON
+set PATH=%ROOTDIR%/bin;%PATH%
+%ROOTDIR%/bin/bash.exe -c 'svn --force export http://apt-cyg.googlecode.com/svn/trunk/ /bin/'
+%ROOTDIR%/bin/bash.exe -c 'chmod +x /bin/apt-cyg'
+@ECHO OFF
+ECHO apt-cyg installed.
+
 ENDLOCAL
  
 PAUSE
