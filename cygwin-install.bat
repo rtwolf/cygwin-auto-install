@@ -34,12 +34,10 @@ ECHO  - %PACKAGES%
 ECHO.
 
 ECHO apt-cyg installing.
-@ECHO ON
 set PATH=%ROOTDIR%/bin;%PATH%
 %ROOTDIR%/bin/bash.exe -c 'svn --force export http://apt-cyg.googlecode.com/svn/trunk/ /bin/'
 %ROOTDIR%/bin/bash.exe -c 'chmod +x /bin/apt-cyg'
-@ECHO OFF
-ECHO apt-cyg installed.
+ECHO apt-cyg installed if it says somin like "A    /bin" and "A   /bin/apt-cyg" and "Exported revision 18" or some other number.
 
 ENDLOCAL
  
