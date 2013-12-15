@@ -11,3 +11,7 @@ Suggest this workflow for this project: http://scottchacon.com/2011/08/31/github
 
 Source URL:
 https://github.com/rtwolf/cygwin-auto-install/
+
+If you've found this project helpful, please support me by buying me a coffee: http://www.mind-manual.com/blog/buy-me-a-coffee/
+
+Thanks in advance!
