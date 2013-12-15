@@ -14,4 +14,4 @@ https://github.com/rtwolf/cygwin-auto-install/
 
 If you've found this project helpful, please support me by buying me a coffee: http://www.mind-manual.com/blog/buy-me-a-coffee/
 
-Thanks in advance!
+As you may know, "A programmer is just a tool which converts caffeine into code". Thanks in advance!
