@@ -1,4 +1,4 @@
-auto-cygwin-install
+cygwin-auto-install
 ===================
 
 Automated cygwin install. Just download the project as a zip file, extract and run cygwin-install.bat to install cygwin + apt-cyg + packages required for apt-cyg + optional packages.
