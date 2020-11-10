@@ -7,6 +7,14 @@ SETLOCAL
  
 REM -- Change to the directory of the executing batch file
 CD %~dp0
+
+REM -- Download the Cygwin installer
+IF NOT EXIST cygwin-setup.exe (
+	ECHO cygwin-setup.exe NOT found! Downloading installer...
+	bitsadmin /transfer cygwinDownloadJob /download /priority normal https://cygwin.com/setup-x86_64.exe %CD%\\cygwin-setup.exe
+) ELSE (
+	ECHO cygwin-setup.exe found! Skipping installer download...
+)
  
 REM -- Configure our paths
 SET SITE=http://cygwin.mirrors.pair.com/
@@ -18,13 +26,14 @@ SET PACKAGES=mintty,wget,ctags,diffutils,git,git-completion,git-svn,stgit,mercur
 REM -- These are necessary for apt-cyg install, do not change. Any duplicates will be ignored.
 SET PACKAGES=%PACKAGES%,wget,tar,gawk,bzip2,subversion
  
+REM -- More info on command line options at: https://cygwin.com/faq/faq.html#faq.setup.cli
 REM -- Do it!
 ECHO *** INSTALLING DEFAULT PACKAGES
-setup --quiet-mode --no-desktop --download --local-install --no-verify -s %SITE% -l "%LOCALDIR%" -R "%ROOTDIR%"
+cygwin-setup --quiet-mode --no-desktop --download --local-install --no-verify -s %SITE% -l "%LOCALDIR%" -R "%ROOTDIR%"
 ECHO.
 ECHO.
 ECHO *** INSTALLING CUSTOM PACKAGES
-setup -q -d -D -L -X -s %SITE% -l "%LOCALDIR%" -R "%ROOTDIR%" -P %PACKAGES%
+cygwin-setup -q -d -D -L -X -s %SITE% -l "%LOCALDIR%" -R "%ROOTDIR%" -P %PACKAGES%
  
 REM -- Show what we did
 ECHO.
